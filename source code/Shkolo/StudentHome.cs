@@ -7,13 +7,14 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Linq;
 using Guna.UI2.WinForms;
+using System.Text;
 
 namespace Shkolo
 {
     public partial class StudentHome : Form
     {
         private Person person = null;
-        private string connectionString = @"server=192.168.100.53;username=root;password=qazwsxedcrfvtgbyhnujm;database=shkolo";
+        private readonly string connectionString = BuildConnectionString();
 
         public StudentHome(Person temp)
         {
@@ -721,6 +722,18 @@ namespace Shkolo
             }
 
             return button;
+        }
+        private static string BuildConnectionString()
+        {
+            StringBuilder sb = new StringBuilder();
+            StreamReader stream = new StreamReader(@"..\..\..\ExportedDB\connectionStringParameters.ini");
+
+            while (!stream.EndOfStream)
+            {
+                sb.Append(stream.ReadLine() + ";");
+            }
+
+            return sb.ToString();
         }
     }
 }

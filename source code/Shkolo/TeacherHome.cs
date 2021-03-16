@@ -6,13 +6,14 @@ using MySql.Data.MySqlClient;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Shkolo
 {
     public partial class TeacherHome : Form
     {
         private Teacher teacher = null;
-        private string connectionString = @"server=192.168.100.53;username=root;password=qazwsxedcrfvtgbyhnujm;database=shkolo";
+        private readonly string connectionString = BuildConnectionString();
 
         private int gradeSelected = -1;
         public TeacherHome(Person person)
@@ -877,6 +878,18 @@ namespace Shkolo
             conn.Close();
 
             return int.Parse(result);
+        }
+        private static string BuildConnectionString()
+        {
+            StringBuilder sb = new StringBuilder();
+            StreamReader stream = new StreamReader(@"..\..\..\ExportedDB\connectionStringParameters.ini");
+
+            while (!stream.EndOfStream)
+            {
+                sb.Append(stream.ReadLine() + ";");
+            }
+
+            return sb.ToString();
         }
     }
 }

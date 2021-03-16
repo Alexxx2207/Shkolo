@@ -17,7 +17,7 @@ namespace Shkolo
 {
     public partial class LogIn : Form
     {
-        private string connectionString = @"server=192.168.100.53;user=root;password=qazwsxedcrfvtgbyhnujm;database=shkolo";
+        private readonly string connectionString = BuildConnectionString();
         public LogIn()
         {
             InitializeComponent();
@@ -247,6 +247,17 @@ namespace Shkolo
                 return new byte[0];
             }
         }
+        private static string BuildConnectionString()
+        {
+            StringBuilder sb = new StringBuilder();
+            StreamReader stream = new StreamReader(@"..\..\..\ExportedDB\connectionStringParameters.ini");
 
+            while (!stream.EndOfStream)
+            {
+                sb.Append(stream.ReadLine());
+            }
+
+            return sb.ToString();
+        }
     }
 }

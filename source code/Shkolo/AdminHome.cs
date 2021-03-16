@@ -16,7 +16,7 @@ namespace Shkolo
 {
     public partial class AdminHome : Form
     {
-        private string connectionString = @"server=192.168.100.53;username=root;password=qazwsxedcrfvtgbyhnujm;database=shkolo";
+        private readonly string connectionString = BuildConnectionString();
         private Person admin;
         public AdminHome(Person person)
         {
@@ -558,7 +558,10 @@ namespace Shkolo
             }
             conn.Close();
 
-            ClassesComboBox.SelectedItem = ClassesComboBox.Items[0];
+            if (ClassesComboBox.Items.Count > 0)
+            {
+                ClassesComboBox.SelectedItem = ClassesComboBox.Items[0];
+            }
         }
         
         private bool ValidateEventInviteId(int id)
@@ -1161,6 +1164,18 @@ namespace Shkolo
             profilePanel.Visible = false;
             PrivateEventsMenuPanel.Visible = false;
             eventsPanel.Visible = false;
+        }
+        private static string BuildConnectionString()
+        {
+            StringBuilder sb = new StringBuilder();
+            StreamReader stream = new StreamReader(@"..\..\..\ExportedDB\connectionStringParameters.ini");
+
+            while (!stream.EndOfStream)
+            {
+                sb.Append(stream.ReadLine() + ";");
+            }
+
+            return sb.ToString();
         }
     }
 }

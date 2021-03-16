@@ -21,7 +21,7 @@ namespace Shkolo
 {
     public partial class SignUp : Form
     {
-        private string connectionString = @"server=192.168.100.53;username=root;password=qazwsxedcrfvtgbyhnujm;database=shkolo";
+        private readonly string connectionString = BuildConnectionString();
         
         public SignUp()
         {
@@ -261,7 +261,7 @@ namespace Shkolo
                         }
 
                         person = new Administrator(FullName.Text, age, DateTimePicker.Value.ToString().Split(' ')[0], Email.Text, hash, ConvertImage(FileDialog1.FileName));
-                        MySqlCommand command = new MySqlCommand($@"INSERT INTO administration(id, namee, age, birth_date, email, passwordd, profile_image,salt) VALUES ({adminID},'{person.FullName}', {person.Age}, '{person.BirthDate}', '{person.Email}', @pass, @img, @salt);", conn);
+                        MySqlCommand command = new MySqlCommand($@"INSERT INTO administration(id, namee, age, birth_date, email, passwordd, profile_image,salt, profile_color) VALUES ({adminID},'{person.FullName}', {person.Age}, '{person.BirthDate}', '{person.Email}', @pass, @img, @salt, '{"255, 162, 0"}');", conn);
                         command.Parameters.Add(new MySqlParameter("@img", person.Image));
                         command.Parameters.Add(new MySqlParameter("@salt", salt));
                         command.Parameters.Add(new MySqlParameter("@pass", person.Password));
@@ -640,6 +640,18 @@ namespace Shkolo
             conn.Close();
 
             return int.Parse(result);
+        }
+        private static string BuildConnectionString()
+        {
+            StringBuilder sb = new StringBuilder();
+            StreamReader stream = new StreamReader(@"..\..\..\ExportedDB\connectionStringParameters.ini");
+
+            while (!stream.EndOfStream)
+            {
+                sb.Append(stream.ReadLine() + ";");
+            }
+
+            return sb.ToString();
         }
     }
 }
