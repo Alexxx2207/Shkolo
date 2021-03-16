@@ -5,6 +5,12 @@ The whole project is written on C# and sql queries! It's a windows from applicat
 
 -> DATABASES are made with MySQL database management system.
 
+Database is exported in source code/ExportedDB. There are all tables and a connectionStringParameters.ini.
+
+Fist make a connection to your new imported database. Then write in connectionStringParameters.ini parameters of your newly created connection.
+
+AT THE END OF EVERY LINE WHITE ';'. 
+
 1.Tables:
 
 students - store student profiles
