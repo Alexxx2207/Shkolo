@@ -23,6 +23,4 @@ events - store information about all created events by the administrations
 event_invites - store invites for events
 The code is in 'source code' folder!
 
-If you want to install the app, go in 'EXE' folder and click 'Shkolo'.
-
 THE PLATFORM IS CODED TO WORK FOR ONLY ONE SCHOOL!
