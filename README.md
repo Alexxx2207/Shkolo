@@ -1,13 +1,13 @@
 # Shkolo
 Basic platform for bulgarian school. Teachers, students and administration can use it to ease their workflow and do their job remotely.
 
-The whole project is written on C# and sql queries! It's a windows from application.
+The whole project is written on C# and sql queries! It's a windows form application.
 
--> DATABASES are made with MySQL database management system.
+-> DATABASES are builded with MySQL database management system.
 
 Database is exported in source code/ExportedDB. There are all tables and a connectionStringParameters.ini.
 
-Fist make a connection to your new imported database. Then write in connectionStringParameters.ini parameters of your newly created connection.
+First make a connection to your new imported database. Then write in connectionStringParameters.ini parameters of your newly created connection.
 
 AT THE END OF EVERY LINE WHITE ';'. 
 
